@@ -1,0 +1,36 @@
+{
+  "name": "amintado/yii2-module-printingOffice-inventory",
+  "description": "module for inventory manage for amintado/printing-office project",
+  "keywords": [
+    "yii2",
+    "yii2-inventory",
+    "inventory system for printing office",
+    "amintado"
+  ],
+  "type": "yii2-extension",
+  "license": "GPL",
+  "version": "3",
+  "homepage": "https://github.com/amintado/yii2-module-printingOffice-inventory",
+  "authors": [
+    {
+      "name": "amintado",
+      "email": "amintado@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "yiisoft/yii2": "~2.0.6",
+    "yiisoft/yii2-bootstrap": "~2.0.0",
+    "kartik-v/yii2-mpdf":  "*",
+    "mpdf/mpdf":"6.1.x"
+  },
+  "require-dev": {
+    "amintado/yii2-option": "@dev",
+    "kartik-v/yii2-grid": "@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "amintado\\pinventory\\": ""
+    }
+  }
+}

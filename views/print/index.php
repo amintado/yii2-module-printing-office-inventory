@@ -18,8 +18,13 @@ $('#createbtn').click(function(e) {
   $('#CreateModal').modal('show');
   setTimeout(function() {
     $('#sprint-storage').select2('open');
-  },1000);
+  
+    $('#w1').datepicker('show');
     
+  },1000);
+    setTimeout(function() {
+        $('.datepicker-dropdown').attr({right:'auto !important',left:'auto !important'});
+    },1500);
 
 });
 JS;
@@ -35,7 +40,7 @@ Modal::end();
 ?>
 <div class="sprint-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -78,7 +83,7 @@ Modal::end();
         'pjax' => true,
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-sprint']],
         'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
+            'type' => GridView::TYPE_DEFAULT,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
         ],
         // your toolbar can include the additional full export menu

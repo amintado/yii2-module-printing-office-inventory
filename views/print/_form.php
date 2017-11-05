@@ -41,6 +41,7 @@ $('#sprint-storage').on('select2:select',function(n){
                    if (jQuery('#sprint-product').data('select2')) { jQuery('#sprint-product').select2('destroy'); }
 jQuery.when(jQuery('#sprint-product').select2(select2_e05632a1)).done(initS2Loading('sprint-product','s2options_d6851687'));
                    setTimeout(function() {
+                       $('#w1').datepicker('show');
                        $('#sprint-product').select2('open');
                    },2000);
                    
@@ -59,14 +60,15 @@ jQuery.when(jQuery('#sprint-product').select2(select2_e05632a1)).done(initS2Load
        
 
 $('#sprint-zink_number').on('keypress',function(e) {
-    
+    $('#w1').datepicker('show');
         if(e.which == 13) {
             e.preventDefault();
+            
                              $('#sprint-tiraj').focus();
                           }
         });
 $('#sprint-tiraj').on('keypress',function(e) {
-    
+    $('#w1').datepicker('show');
       if(e.which == 13) {
           e.preventDefault();
                              $('#sprint-frame_count').focus();
@@ -74,6 +76,7 @@ $('#sprint-tiraj').on('keypress',function(e) {
 });
 
 $('#sprint-frame_count').on('keypress',function(e) {
+    $('#w1').datepicker('show');
     if(e.which == 13) {
         e.preventDefault();
                              $('#sprint-zink_count').focus();
@@ -81,6 +84,7 @@ $('#sprint-frame_count').on('keypress',function(e) {
 });
 
 $('#sprint-zink_count').on('keypress',function(e) {
+    $('#w1').datepicker('show');
     if(e.which == 13) {
         e.preventDefault();
                              $('#sprint-dimensions').focus();
@@ -88,6 +92,7 @@ $('#sprint-zink_count').on('keypress',function(e) {
 });
 
 $('#sprint-dimensions').on('keypress',function(e) {
+    $('#w1').datepicker('show');
     if(e.which == 13) {
         e.preventDefault();
                              $('#sprint-one_two').focus();
@@ -95,6 +100,7 @@ $('#sprint-dimensions').on('keypress',function(e) {
 });
 
 $('#sprint-one_two').on('keypress',function(e) {
+    $('#w1').datepicker('show');
     if(e.which == 13) {
         e.preventDefault();
                              $('#sprint-color_count').focus();
@@ -102,6 +108,7 @@ $('#sprint-one_two').on('keypress',function(e) {
 });
 
 $('#sprint-color_count').on('keypress',function(e) {
+    $('#w1').datepicker('show');
     if(e.which == 13) {
         e.preventDefault();
                              $('#sprint-five_color').focus();
@@ -109,6 +116,7 @@ $('#sprint-color_count').on('keypress',function(e) {
 });
 
 $('#sprint-five_color').on('keypress',function(e) {
+    $('#w1').datepicker('show');
     if(e.which == 13) {
         e.preventDefault();
                              $('#sprint-page_count').focus();
@@ -116,6 +124,7 @@ $('#sprint-five_color').on('keypress',function(e) {
 });
 
 $('#sprint-five_color').on('keypress',function(e) {
+    $('#w1').datepicker('show');
     if(e.which == 13) {
         e.preventDefault();
                              $('#sprint-page_count').focus();
@@ -123,6 +132,7 @@ $('#sprint-five_color').on('keypress',function(e) {
 });
 
 $('#sprint-page_count').on('keypress',function(e) {
+    $('#w1').datepicker('show');
     if(e.which == 13) {
                 e.preventDefault();
 
@@ -130,6 +140,19 @@ $('#sprint-page_count').on('keypress',function(e) {
                              $('#sprint-description').focus();
                       }
 });
+$('.modal-body').click(function() {
+  $('#w1').datepicker('show');
+});
+
+$('.modal-header').click(function() {
+  $('#w1').datepicker('show');
+});
+
+$('.modal-content').click(function() {
+  $('#w1').datepicker('show');
+});
+
+
 
 
 JS;
@@ -137,7 +160,15 @@ $this->registerJs($j, \yii\web\View::POS_END)
 
 
 ?>
-
+<style>
+    .datepicker-rtl{
+        right:auto !important;
+        /*left: auto !important;*/
+    }
+    #w1{
+        opacity:0;
+    }
+</style>
 <div class="sprint-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -201,10 +232,13 @@ $this->registerJs($j, \yii\web\View::POS_END)
         </div>
         <div class="col-md-4">
             <?= $form->field($model,'date')->widget(faravaghi\jalaliDatePicker\jalaliDatePicker::classname(),[
-                'format' => 'yyyy/mm/dd',
-                'viewformat' => 'yyyy/mm/dd',
-                'placement' => 'left',
-                'todayBtn' => 'linked',
+                    'options'=>[
+                        'format' => 'yyyy/mm/dd',
+                        'viewformat' => 'yyyy/mm/dd',
+                        'placement' => 'left',
+                        'todayBtn' => 'linked',
+                    ]
+
             ]) ?>
         </div>
     </div>

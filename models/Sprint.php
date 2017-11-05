@@ -48,6 +48,7 @@ class Sprint extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'frame_count', 'zink_count', 'one_two', 'uid'], 'integer'],
+            [['frame_count', 'zink_count', 'one_two', 'uid'], 'required'],
             [['tiraj', 'color_count', 'page_count'], 'number'],
             [['date'], 'safe'],
             [['description'], 'string'],

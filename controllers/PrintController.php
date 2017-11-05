@@ -53,8 +53,10 @@ class PrintController extends Controller
         $searchModel = new PrintSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Sprint();
-        $model->load(Yii::$app->request->post());
-        $model->save();
+        if (!empty(Yii::$app->request->post())){
+            $model->load(Yii::$app->request->post());
+            $model->save();
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -142,7 +144,7 @@ class PrintController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->deleteWithRelated();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

@@ -47,8 +47,11 @@ class StorageController extends Controller
     {
 
         $model = new Storage();
-        $model->load(Yii::$app->request->post());
-        $model->save();
+        if(!empty(Yii::$app->request->post())){
+            $model->load(Yii::$app->request->post());
+            $model->save();
+        }
+
         $searchModel = new StorageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

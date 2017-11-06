@@ -43,7 +43,7 @@ return [
     'Color Count'=>'تعداد رنگ',
     'Five Color'=>'رنگ پنجم',
     'Page Count'=>'تعداد صفحه',
-    'Product'=>'محصول',
+    'Product'=>'کالای مصرفی',
     'Stock'=>'موجودی',
     
     
@@ -52,7 +52,13 @@ return [
     'Sprints'=>'اقلام چاپ شده',
     'Update'=>'بروزرسانی',
     'Update {modelClass}: '=>'{modelClass}:بروزرسانی ',
-    'Create'=>'ثبت'
+    'Create'=>'ثبت',
+    'Create Storage'=>'ثبت انبار',
+    'Storages'=>'انبارها',
+    'Delete'=>'حذف',
+    'Export All'=>'خروجی همه اطلاعات',
+    'Create Product'=>'ثبت کالای  مصرفی جدید',
+    'Products'=>'لیست کالاهای مصرفی'
 
 
 ];

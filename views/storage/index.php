@@ -10,7 +10,7 @@ use kartik\export\ExportMenu;
 use kartik\grid\GridView;
 use yii\web\View;
 
-$this->title = Yii::t('common', 'Storages');
+$this->title = Yii::t('atpinventory', 'Storages');
 $this->params['breadcrumbs'][] = $this->title;
 
 
@@ -38,11 +38,10 @@ Modal::end();
 
 <div class="storage-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('common', 'Create Storage'), ['#'], ['class' => 'btn btn-success','id'=>'createbtn']) ?>
+        <?= Html::a(Yii::t('atpinventory', 'Create Storage'), ['#'], ['class' => 'btn btn-success','id'=>'createbtn']) ?>
     </p>
 
     <?php 
@@ -62,26 +61,11 @@ Modal::end();
         'pjax' => true,
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-storage']],
         'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
+            'type' => GridView::TYPE_DEFAULT,
+            'heading' => false,
         ],
         // your toolbar can include the additional full export menu
-        'toolbar' => [
-            '{export}',
-            ExportMenu::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => $gridColumn,
-                'target' => ExportMenu::TARGET_BLANK,
-                'fontAwesome' => true,
-                'dropdownOptions' => [
-                    'label' => 'Full',
-                    'class' => 'btn btn-default',
-                    'itemsBefore' => [
-                        '<li class="dropdown-header">Export All Data</li>',
-                    ],
-                ],
-            ]) ,
-        ],
+        'toolbar' => false
     ]); ?>
 
 </div>

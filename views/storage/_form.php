@@ -27,10 +27,10 @@ $this->registerJs($j,View::POS_END);
 
     <div class="form-group">
     <?php if(Yii::$app->controller->action->id != 'save-as-new'): ?>
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('common', 'Create') : Yii::t('common', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('atpinventory', 'Create') : Yii::t('atpinventory', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     <?php endif; ?>
 
-        <?= Html::a(Yii::t('app', 'Cancel'), ['#'] , ['class'=> 'btn btn-danger','id'=>'cancle']) ?>
+        <?= Html::a(Yii::t('atpinventory', 'Cancel'), ['#'] , ['class'=> 'btn btn-danger','id'=>'cancle']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -2,6 +2,9 @@
 
 namespace amintado\pinventory\controllers;
 
+use amintado\pinventory\models\ProductSearch;
+use amintado\pinventory\models\StorageItems;
+use amintado\pinventory\models\StorageItemsSearch;
 use Yii;
 use amintado\pinventory\models\Storage;
 use amintado\pinventory\models\StorageSearch;
@@ -73,9 +76,16 @@ class StorageController extends Controller
         $providerStorageItems = new \yii\data\ArrayDataProvider([
             'allModels' => $model->storageItems,
         ]);
+
+        $searchModel = new StorageItemsSearch();
+        $dataProvider = $searchModel->StorageSearch(Yii::$app->request->queryParams,$model->name);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
             'providerStorageItems' => $providerStorageItems,
+
+            'searchModel'=> $searchModel,
+            'dataProvider'=> $dataProvider
         ]);
     }
 

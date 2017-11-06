@@ -64,4 +64,7 @@ use amintado\pinventory\models\Product;
 
         return $dataProvider;
     }
+
+
+
 }

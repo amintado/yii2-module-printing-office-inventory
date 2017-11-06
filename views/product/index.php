@@ -4,30 +4,26 @@
 /* @var $searchModel amintado\pinventory\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
 use kartik\grid\GridView;
 
-$this->title = Yii::t('common', 'Products');
+$this->title = Yii::t('atpinventory', 'Products');
 $this->params['breadcrumbs'][] = $this->title;
-$search = "$('.search-button').click(function(){
-	$('.search-form').toggle(1000);
-	return false;
-});";
-$this->registerJs($search);
+
+
+Modal::begin(['id'=>'CreateModal']);
+echo $this->render('create',['model'=> $model]);
+Modal::end();
 ?>
 <div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('common', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('common', 'Advance Search'), '#', ['class' => 'btn btn-info search-button']) ?>
+        <?= Html::a(Yii::t('atpinventory', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <div class="search-form" style="display:none">
-        <?=  $this->render('_search', ['model' => $searchModel]); ?>
-    </div>
+
     <?php 
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
@@ -52,8 +48,8 @@ $this->registerJs($search);
         'pjax' => true,
         'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-product']],
         'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
+            'type' => GridView::TYPE_DEFAULT,
+            'heading' => false
         ],
         // your toolbar can include the additional full export menu
         'toolbar' => [
@@ -64,10 +60,10 @@ $this->registerJs($search);
                 'target' => ExportMenu::TARGET_BLANK,
                 'fontAwesome' => true,
                 'dropdownOptions' => [
-                    'label' => 'Full',
+                    'label' => Yii::t('atpinventory', 'Export All'),
                     'class' => 'btn btn-default',
                     'itemsBefore' => [
-                        '<li class="dropdown-header">Export All Data</li>',
+                        '<li class="dropdown-header">'. Yii::t('atpinventory', 'Export All').'</li>',
                     ],
                 ],
             ]) ,

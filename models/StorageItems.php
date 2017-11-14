@@ -10,7 +10,9 @@ use Yii;
  * @property integer $id
  * @property string $storage
  * @property string $product
- * @property double $stock
+ * @property float $stock
+ * @property float $min_indicator
+ * @property float $max_indicator
  *
  * @property \amintado\pinventory\models\Storage $storage0
  */
@@ -36,7 +38,7 @@ class StorageItems extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['stock'], 'number'],
+            [['stock','min_indicator','max_indicator'], 'number'],
             [['storage', 'product'], 'string', 'max' => 255]
         ];
     }
@@ -59,6 +61,8 @@ class StorageItems extends \yii\db\ActiveRecord
             'storage' => Yii::t('atpinventory', 'Storage'),
             'product' => Yii::t('atpinventory', 'Product'),
             'stock' => Yii::t('atpinventory', 'Stock'),
+            'min_indicator' => Yii::t('atpinventory', 'min_indicator'),
+            'max_indicator' => Yii::t('atpinventory', 'max_indicator'),
         ];
     }
     

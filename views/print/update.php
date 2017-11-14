@@ -16,6 +16,7 @@ $this->title = Yii::t('atpinventory', 'Update {modelClass}: ', [
 
     <?= $this->render('_form', [
         'model' => $model,
+        'update'=> $update
     ]) ?>
 
 </div>

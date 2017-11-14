@@ -67,6 +67,33 @@ use amintado\pinventory\models\StorageItems;
         return $dataProvider;
     }
 
+
+     public function searchItems($params, $storage)
+     {
+         $query = StorageItems::find();
+
+         $dataProvider = new ActiveDataProvider([
+             'query' => $query,
+         ]);
+
+         $this->load($params);
+         $query->where(['storage'=>$storage]);
+         if (!$this->validate()) {
+             // uncomment the following line if you do not want to return any records when validation fails
+             // $query->where('0=1');
+             return $dataProvider;
+         }
+
+         $query->andFilterWhere([
+             'id' => $this->id,
+             'stock' => $this->stock,
+         ]);
+
+         $query->andFilterWhere(['like', 'storage', $this->storage])
+             ->andFilterWhere(['like', 'product', $this->product]);
+
+         return $dataProvider;
+     }
     /**
      * Creates data provider instance with search query applied
      *

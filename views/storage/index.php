@@ -8,6 +8,7 @@ use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
 use kartik\grid\GridView;
+use yii\helpers\Url;
 use yii\web\View;
 
 $this->title = Yii::t('atpinventory', 'Storages');
@@ -49,7 +50,36 @@ Modal::end();
         'name',
         [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{view} {update} {delete}',
+            'template' => '{update} {delete}',
+            'buttons' => [
+                'update' => function ($url) {
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, ['title' => 'تغییر اسم انبار']);
+                },
+            ],
+
+        ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => ' {items}',
+            'buttons' => [
+                'items' => function ($url, $model) {
+                    $moduleID=Yii::$app->controller->module->id;
+                    $storage=urlencode($model->name);
+                    return Html::a('<span class="glyphicon glyphicon-list-alt"></span>', ["/$moduleID/storage-items/view?id=".$storage], ['title' => 'اقلام انبار']);
+                },
+            ],
+
+        ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => ' {changeitems}',
+            'buttons' => [
+                'changeitems' => function ($url, $model) {
+                    $moduleID=Yii::$app->controller->module->id;
+                    $storage=urlencode($model->name);
+                    return Html::a('<span class="glyphicon glyphicon-transfer"></span>', ["/$moduleID/storage/update?id=".$storage], ['title' => 'تغییر اقلام داخل انبار']);
+                },
+            ],
 
         ],
     ]; 

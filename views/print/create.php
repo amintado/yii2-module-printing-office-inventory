@@ -7,7 +7,6 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model amintado\pinventory\models\Sprint */
 PinventoryAsset::register($this);
-
 ?>
 <style>
     .modal-content{
@@ -24,9 +23,6 @@ PinventoryAsset::register($this);
     }
 </style>
 <div class="sprint-create" >
-
-    <h1><?= Html::encode(Yii::t('atpinventory', 'Create Sprint')) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

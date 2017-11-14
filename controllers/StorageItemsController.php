@@ -2,10 +2,12 @@
 
 namespace amintado\pinventory\controllers;
 
+use amintado\pinventory\models\Storage;
 use Yii;
 use amintado\pinventory\models\StorageItems;
 use amintado\pinventory\models\StorageItemsSearch;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -61,9 +63,19 @@ class StorageItemsController extends Controller
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
+        $id=urldecode($id);
+        $searchModel = new StorageItemsSearch();
+        $dataProvider = $searchModel->searchItems(Yii::$app->request->queryParams,$id);
+
+
+        $model = StorageItems::find()->where(['storage'=>$id])->all();
+        if (empty($model)){
+            throw new ForbiddenHttpException('هیچ کالایی در این انبار موجود نیست');
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -93,6 +105,7 @@ class StorageItemsController extends Controller
      */
     public function actionUpdate($id)
     {
+
         if (Yii::$app->request->post('_asnew') == '1') {
             $model = new StorageItems();
         }else{

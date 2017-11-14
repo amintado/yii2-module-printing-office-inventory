@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'storage')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\amintado\pinventory\models\Storage::find()->orderBy('name')->asArray()->all(), 'name', 'name'),
-        'options' => ['placeholder' => Yii::t('common', 'Choose Taban storage')],
+        'options' => ['placeholder' => 'انبار مورد نظر'],
         'pluginOptions' => [
             'allowClear' => true
         ],

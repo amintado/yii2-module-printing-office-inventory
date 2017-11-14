@@ -36,10 +36,10 @@ return [
     'Storage'=>'انبار',
     'Zink Number'=>'شماره زینک',
     'Tiraj'=>'تیراژ',
-    'Frame Count'=>'تعداد فریم',
+    'Frame Count'=>'تعداد فرم',
     'Zink Count'=>'تعداد زینک',
     'Dimensions'=>'ابعاد',
-    'One Two'=>'یک رو/دورو',
+    'One Two'=>'دورو؟',
     'Color Count'=>'تعداد رنگ',
     'Five Color'=>'رنگ پنجم',
     'Page Count'=>'تعداد صفحه',
@@ -58,7 +58,11 @@ return [
     'Delete'=>'حذف',
     'Export All'=>'خروجی همه اطلاعات',
     'Create Product'=>'ثبت کالای  مصرفی جدید',
-    'Products'=>'لیست کالاهای مصرفی'
+    'Products'=>'لیست کالاهای مصرفی',
+    'factor_num'=>'شماره فاکتور',
+    'litography'=>'مرکز لیتوگرافی',
+    'max_indicator'=>'حداکثر موجودی',
+    'min_indicator'=>'حداقل موجودی'
 
 
 ];

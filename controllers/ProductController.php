@@ -47,10 +47,15 @@ class ProductController extends Controller
     {
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $model = new Product();
+        if (!empty(Yii::$app->request->post())){
+            $model->load(Yii::$app->request->post());
+            $model->save();
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$model
         ]);
     }
 
@@ -80,7 +85,7 @@ class ProductController extends Controller
     {
         $model = new Product();
 
-        if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

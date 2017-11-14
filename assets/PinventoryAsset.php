@@ -18,9 +18,13 @@ use yii\web\AssetBundle;
 class PinventoryAsset extends AssetBundle {
     public $sourcePath = '@vendor/amintado/yii2-module-printing-office-inventory/assets';
 
-
+    public $css=[
+        'css/multi-select.css'
+    ];
     public $js = [
         'js/select2.min.js',
+        'js/jquery.quicksearch.js',
+        'js/jquery.multi-select.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

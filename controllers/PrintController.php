@@ -2,8 +2,12 @@
 
 namespace amintado\pinventory\controllers;
 
+use amintado\base\AmintadoFunctions;
+use amintado\pinventory\models\Cardex;
 use amintado\pinventory\models\Product;
+use amintado\pinventory\models\Storage;
 use amintado\pinventory\models\StorageItems;
+use common\models\User;
 use Yii;
 use amintado\pinventory\models\Sprint;
 use amintado\pinventory\models\PrintSearch;
@@ -33,7 +37,7 @@ class PrintController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'pdf', 'save-as-new', 'productlist'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'pdf', 'save-as-new', 'productlist','factor'],
                         'roles' => ['@']
                     ],
                     [
@@ -52,11 +56,47 @@ class PrintController extends Controller
     {
         $searchModel = new PrintSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $post=Yii::$app->request->post();
         $model = new Sprint();
-        if (!empty(Yii::$app->request->post())){
+        if (!empty($post)){
+
+
             $model->load(Yii::$app->request->post());
-            $model->save();
+            if (empty($model->date)){
+                $model->date=date('ymd');
+            }
+            if ($model->save()){
+                //<add cardex record>
+                {
+                    //<Change Stock In StorageItem>
+                    {
+                        $StorageItem=StorageItems::findOne(['storage'=>$model->storage,'product'=>$model->product]);
+                        $oldStock=$StorageItem->stock;
+                        $StorageItem->stock=((float)$StorageItem->stock)-((float)$model->page_count);
+                        $StorageItem->save();
+                    }
+                    //</Change Stock In StorageItem>
+
+                    $user = User::findOne(['id' => Yii::$app->user->id]);
+                    $cardex = new Cardex();
+                    $cardex->date = date('ymd');
+                    $cardex->description = 'ثبت چاپ توسط کاربر ' . $user->username . ' در تاریخ ' . (new AmintadoFunctions())->convertdate(date('ymd'));
+                    $cardex->stock = $StorageItem->stock;
+                    $cardex->change = $model->page_count - $oldStock;
+                    $cardex->product=$model->product;
+                    $cardex->storage=$model->storage;
+                    $cardex->uid = $user->id;
+                    $cardex->model=(string)$model->id;
+                    $cardex->username = $user->username;
+                    $cardex->module = Cardex::MODULE_PRINT;
+                    $cardex->save();
+                }
+                //</add cardex record>
+            }
+
+
         }
+        $model=new Sprint();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -105,6 +145,7 @@ class PrintController extends Controller
         $model = new Sprint();
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -123,15 +164,48 @@ class PrintController extends Controller
     {
         if (Yii::$app->request->post('_asnew') == '1') {
             $model = new Sprint();
+            $update=false;
         } else {
             $model = $this->findModel($id);
+            $update=true;
+            $stock=$model->page_count;
         }
 
-        if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($update){
+                if ($model->page_count!==$stock){
+                    $items=StorageItems::findOne(['storage'=>$model->storage,'product'=>$model->product]);
+                    $oldStock=$items->stock;
+                    $items->stock=$items->stock - ($model->page_count - (float)$stock);
+                    $items->save();
+                    $user = User::findOne(['id' => Yii::$app->user->id]);
+                    $cardex = new Cardex();
+                    $cardex->date = date('ymd');
+                    $cardex->description = 'ثبت چاپ توسط کاربر ' . $user->username . ' در تاریخ ' . (new AmintadoFunctions())->convertdate(date('ymd'));
+                    $cardex->stock = $items->stock;
+                    $cardex->change = $model->page_count - $oldStock;
+                    $cardex->product=$model->product;
+                    $cardex->storage=$model->storage;
+                    $cardex->uid = $user->id;
+                    $cardex->model=(string)$model->id;
+                    $cardex->username = $user->username;
+                    $cardex->module = Cardex::MODULE_PRINT;
+                    $cardex->save();
+
+                }
+
+
+
+
+
+            }
+
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'update'=>true
             ]);
         }
     }
@@ -144,7 +218,14 @@ class PrintController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model=$this->findModel($id);
+        $count=$model->page_count;
+        if ($model->delete()){
+            $item=StorageItems::find()->where(['storage'=>$model->storage,'product'=>$model->product])->one();
+            $item->stock=$item->stock+(float)$count;
+            $item->save();
+        }
+
 
         return $this->redirect(['index']);
     }
@@ -204,6 +285,10 @@ class PrintController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionFactor($id){
+
     }
 
     /**

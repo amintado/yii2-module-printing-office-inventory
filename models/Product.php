@@ -56,7 +56,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('atpinventory', 'ID'),
             'name' => Yii::t('atpinventory', 'Name'),
-            'descrition' => Yii::t('atpinventory', 'Descrition'),
+            'descrition' => Yii::t('atpinventory', 'Description'),
         ];
     }
     

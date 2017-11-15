@@ -67,7 +67,7 @@ class StorageController extends Controller
 
         $searchModel = new StorageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $model=new Storage();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

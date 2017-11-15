@@ -54,7 +54,7 @@ class CardexController extends Controller
         $model->save();
         }
 
-
+        $model=new Cardex();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

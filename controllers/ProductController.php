@@ -52,6 +52,7 @@ class ProductController extends Controller
             $model->load(Yii::$app->request->post());
             $model->save();
         }
+        $model=new Product();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

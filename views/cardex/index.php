@@ -25,17 +25,10 @@ e.preventDefault();
 $('#CreateModal').modal('hide');
 });
 JS;
-$this->registerJs($j);
-Modal::begin(['id' => 'CreateModal']);
-echo $this->render('create', ['model' => $model]);
-Modal::end();
+
 ?>
 <div class="cardex-index">
 
-    <p>
-        <?= Html::a('Create Cardex', ['#'], ['class' => 'btn btn-success', 'id' => 'createbtn']) ?>
-
-    </p>
     <?php
     $gridColumn = [
         ['attribute' => 'id', 'visible' => false],

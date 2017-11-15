@@ -12,8 +12,16 @@ use kartik\grid\GridView;
 $this->title = Yii::t('atpinventory', 'Products');
 $this->params['breadcrumbs'][] = $this->title;
 
+$j=<<<JS
+$('#createbtn').click(function(e) {
+    e.preventDefault();
+    $('#CreateModal').modal('show');
+  
+});
+JS;
+$this->registerJs($j);
 
-Modal::begin(['id'=>'CreateModal']);
+Modal::begin(['id'=>'CreateModal','header' => '<h3>ثبت کالای جدید</h3>']);
 echo $this->render('create',['model'=> $model]);
 Modal::end();
 ?>
@@ -21,7 +29,7 @@ Modal::end();
 
 
     <p>
-        <?= Html::a(Yii::t('atpinventory', 'Create Product'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('atpinventory', 'Create Product'), ['create'], ['class' => 'btn btn-success','id'=>'createbtn']) ?>
     </p>
 
     <?php 

@@ -69,12 +69,5 @@ class Product extends \yii\db\ActiveRecord
     }
     
 
-    /**
-     * @inheritdoc
-     * @return \amintado\wordpress\models\ProductQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \amintado\wordpress\models\ProductQuery(get_called_class());
-    }
+
 }

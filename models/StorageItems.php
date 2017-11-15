@@ -75,12 +75,5 @@ class StorageItems extends \yii\db\ActiveRecord
     }
     
 
-    /**
-     * @inheritdoc
-     * @return \amintado\wordpress\models\StorageItemsQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new \amintado\wordpress\models\StorageItemsQuery(get_called_class());
-    }
+
 }

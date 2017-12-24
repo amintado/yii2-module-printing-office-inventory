@@ -1,39 +1,41 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $searchModel amintado\pinventory\models\ProductSearch */
+/* @var $searchModel amintado\pinventory\models\PeoplesCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-use yii\bootstrap\Modal;
 use yii\helpers\Html;
+use yii\bootstrap\Modal;
 use kartik\export\ExportMenu;
 use kartik\grid\GridView;
 
-$this->title = Yii::t('atpinventory', 'Products');
+$this->title = 'مدیریت دسته بندی مراکز';
 $this->params['breadcrumbs'][] = $this->title;
-
 $j=<<<JS
+
 $('#createbtn').click(function(e) {
-    e.preventDefault();
-    $('#CreateModal').modal('show');
-  
+e.preventDefault();
+$('#CreateModal').modal('show');
+});
+$('#cancel').click(function(e) {
+e.preventDefault();
+$('#CreateModal').modal('hide');
 });
 JS;
 $this->registerJs($j);
-
-Modal::begin(['id'=>'CreateModal','header' => '<h3>ثبت کالای جدید</h3>']);
+Modal::begin(['id' => 'CreateModal','header' => 'ثبت دسته ی جدید']);
 echo $this->render('create',['model'=> $model]);
 Modal::end();
 ?>
-<div class="product-index">
-
+<div class="peoples-category-index">
 
     <p>
-        <?= Html::a(Yii::t('atpinventory', 'Create Product'), ['create'], ['class' => 'btn btn-success','id'=>'createbtn']) ?>
-    </p>
+        <?= Html::a('ثبت دسته ی جدید', ['#'], ['class' => 'btn btn-success','id'=>'createbtn']) ?>
 
+    </p>
     <?php 
     $gridColumn = [
+        ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
         'name',
         [
@@ -52,10 +54,10 @@ Modal::end();
         'filterModel' => $searchModel,
         'columns' => $gridColumn,
         'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-product']],
+        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-peoples-category']],
         'panel' => [
-            'type' => GridView::TYPE_DEFAULT,
-            'heading' => false
+            'type' => GridView::TYPE_ACTIVE,
+            'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
         ],
         // your toolbar can include the additional full export menu
         'toolbar' => [
@@ -66,10 +68,10 @@ Modal::end();
                 'target' => ExportMenu::TARGET_BLANK,
                 'fontAwesome' => true,
                 'dropdownOptions' => [
-                    'label' => Yii::t('atpinventory', 'Export All'),
+                    'label' => 'استخراح همه ی اطلاعات',
                     'class' => 'btn btn-default',
                     'itemsBefore' => [
-                        '<li class="dropdown-header">'. Yii::t('atpinventory', 'Export All').'</li>',
+                        '<li class="dropdown-header">استخراج همه ی اطلاعات</li>',
                     ],
                 ],
             ]) ,

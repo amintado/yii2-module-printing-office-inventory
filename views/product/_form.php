@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton($model->isNewRecord ? Yii::t('common', 'ثبت') : Yii::t('common', 'بروزرسانی'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     <?php endif; ?>
     <?php if(Yii::$app->controller->action->id != 'create'): ?>
-      
+
     <?php endif; ?>
         <?= Html::a(Yii::t('common', 'لغو'), Yii::$app->request->referrer , ['class'=> 'btn btn-danger']) ?>
     </div>

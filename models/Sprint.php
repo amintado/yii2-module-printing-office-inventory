@@ -26,6 +26,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $description
  * @property string $factor_num
  * @property string $litography
+ * @property string $storage_factor_num
  */
 class Sprint extends \yii\db\ActiveRecord
 {
@@ -54,7 +55,7 @@ class Sprint extends \yii\db\ActiveRecord
             [['tiraj', 'color_count', 'page_count'], 'number'],
             [['date'], 'safe'],
             [['description'], 'string'],
-            [['storage', 'product', 'zink_number', 'Dimensions', 'five_color','factor_num','litography'], 'string', 'max' => 255]
+            [['storage', 'product', 'zink_number', 'Dimensions', 'five_color','factor_num','litography','storage_factor_num'], 'string', 'max' => 255]
         ];
     }
 
@@ -88,6 +89,7 @@ class Sprint extends \yii\db\ActiveRecord
             'uid' => Yii::t('atpinventory', 'Uid'),
             'description' => Yii::t('atpinventory', 'Description'),
             'factor_num' => Yii::t('atpinventory', 'factor_num'),
+            'storage_factor_num' => Yii::t('atpinventory', 'storage_factor_num'),
             'litography' => Yii::t('atpinventory', 'litography'),
         ];
     }

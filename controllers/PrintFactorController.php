@@ -28,7 +28,7 @@ class PrintFactorController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => [ 'create', 'update'],
+                        'actions' => [ 'create', 'confirm-litography-factor'],
                         'roles' => ['@']
                     ],
                     [
@@ -51,7 +51,7 @@ class PrintFactorController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionConfirmLitographyFactor($id)
     {
         if (Yii::$app->request->post('_asnew') == '1') {
             $model = new SprintConfirm();

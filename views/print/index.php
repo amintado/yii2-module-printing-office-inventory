@@ -112,7 +112,7 @@ $this->registerJs($j, View::POS_END);
 
                     if (empty($model->factor_num)) {
                         $moduleID = Yii::$app->controller->module->id;
-                        return Html::a('<span class="glyphicon glyphicon-ok"></span>', ["/$moduleID/print-factor/update?id=" . $model->id], ['title' => 'تایید فاکتور']);
+                        return Html::a('<span class="glyphicon glyphicon-ok"></span>', ["/$moduleID/print-factor/confirm-litography-factor?id=" . $model->id], ['title' => 'تایید فاکتور']);
                     } else {
                         return '';
                     }

@@ -196,6 +196,9 @@ input:focus ~ .highlight {
 	from { background:#5264AE; }
   to 	{ width:0; background:transparent; }
 }
+.ms-selectable{
+overflow-y: auto; !important;
+}
 CSS;
 
 $this->registerCss($c);
